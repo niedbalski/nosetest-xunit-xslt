@@ -8,4 +8,4 @@ $ xsltproc nosetests.xslt nosetests.xml > output.html
 
 # How it looks like
 
-![Screenshot](https://raw.github.com/niedbalski/nosetest-xunit-xslt/master/screen.png)
+![Screenshot](https://raw.githubusercontent.com/niedbalski/nosetest-xunit-xslt/master/screen.jpg)
