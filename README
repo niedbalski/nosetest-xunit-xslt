@@ -1,2 +1,0 @@
-1) apt-get install xsltproc
-2) xsltproc nosetests.xslt nosetests.xml > tests.html
