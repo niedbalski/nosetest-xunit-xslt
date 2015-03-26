@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+nosetests<?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="html"/>
     <xsl:template match="/">
@@ -22,7 +22,7 @@
                     .failed {
                         display:block;
                     }
-            
+
                    .failed a {
                         color: red;
                         font-weight: bold;
@@ -36,16 +36,22 @@
                         color: green;
                         font-weight: bold;
                     }
-                
+
+                    .passed-message {
+                        border: 1px solid green;
+                    }
                     .error-message {
                         border: 1px solid red;
-                    }        
-    
-                
+                    }
+
+
                 </style>
                 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"/>
                 <script type="text/javascript">
-                    $(document).ready(function() {
+                  $(document).ready(function() {
+                  $(".display-message").click(function() {
+
+                  });
                         $(".filter").change(function(event) {
                             var self = $(this);
                             $('.filter option:selected').each(function() {
@@ -56,7 +62,7 @@
                                     });
                                 }
                             });
-                        }); 
+                        });
                     });
                 </script>
             </head>
@@ -97,35 +103,34 @@
         <xsl:for-each select="testcase">
             <xsl:choose>
                 <xsl:when test="not(*)">
-                    <div class="passed">    
+                    <div class="passed">
                         <pre><b>Class:</b> <xsl:value-of select="@classname"/></pre>
                         <pre><b>Test Name:</b> <xsl:value-of select="@name"/></pre>
                         <pre><b>Running Time:</b> <xsl:value-of select="@time"/></pre>
                         <pre><b>State:</b><a>Passed</a></pre>
                         <xsl:for-each select="*">
                             <xsl:if test="@message">
-                                <div class="error-message">
-                                    <pre><a>>>>Error Message</a></pre>
+                                <div class="passed-message">
                                     <xsl:value-of select="@message"/>
                                 </div>
                             </xsl:if>
                         </xsl:for-each>
-                    <hr></hr>                 
+                    <hr></hr>
                    </div>
                 </xsl:when>
                 <xsl:otherwise>
-                    <div class="failed">    
+                    <div class="failed">
                         <pre><b>Class:</b> <xsl:value-of select="@classname"/></pre>
                         <pre><b>Test Name:</b> <xsl:value-of select="@name"/></pre>
                         <pre><b>Running Time:</b> <xsl:value-of select="@time"/></pre>
                         <pre><b>State:</b><a>Failed</a></pre>
-                        <xsl:for-each select="*">
+                        <xsl:for-each select="system-out">
                             <div class="error-message">
-                                <pre><a>>>>Error Message</a></pre>
-                            <xsl:value-of select="@message"/>
+                                <pre><a class="display-message"> Error Message</a></pre>
+                                <xsl:value-of select="."/>
                             </div>
                         </xsl:for-each>
-                    <hr></hr>                    
+                    <hr></hr>
                     </div>
                 </xsl:otherwise>
             </xsl:choose>
