@@ -124,7 +124,7 @@
                         <pre><b>Test Name:</b> <xsl:value-of select="@name"/></pre>
                         <pre><b>Running Time:</b> <xsl:value-of select="@time"/></pre>
                         <pre><b>State:</b><a>Failed</a></pre>
-                        <xsl:for-each select="system-out">
+                        <xsl:for-each select="failure">
                             <div class="error-message">
                                 <pre><a class="display-message"> Error Message</a></pre>
                                 <xsl:value-of select="."/>
